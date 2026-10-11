@@ -10,3 +10,9 @@
 !.claude/
 !.claude/settings.json
 !.claude/statusline-command.sh
+# Allow root-level gitconfig
+!.gitconfig
+# Generic junk
+*.swp
+*~
+.DS_Store
