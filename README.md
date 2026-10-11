@@ -28,10 +28,10 @@ Keep the machine awake while a long command runs:
 
 | Path | What it is |
 |---|---|
-| `.config/nvim/` | Neovim setup: `init.lua` plus `lua/` modules — plugin specs (`plugins.lua`, lazy.nvim bootstraps itself), `options.lua`, `keymaps.lua` (`<leader>y/p` clipboard, `j/k` ↔ `gj/gk` display-line movement, `<C-j>/<C-k>` half-page jumps, fzf-lua/oil/grug-far bindings), `functions.lua` (markdown-header helper, `<++>` placeholder fill) |
+| `.config/nvim/` | Neovim (lazy.nvim, self-bootstrapping): `init.lua` + `lua/` (plugins, options, keymaps, helpers) — `<leader>y/p` clipboard, `gj/gk` movement, `<C-j>/<C-k>` paging, fzf-lua/oil/grug-far bindings, `<++>` fill |
 | `.config/fish/config.fish` | fish: adds `~/.local/bin` to `PATH`, `rmi` alias, vi keybindings |
 | `.config/kitty/` | `kitty.conf` (F1–F5 tab/window shortcuts) plus auto `dark`/`light`/`no-preference` themes |
-| `.config/nixos/configuration.nix` | NixOS system config: GNOME, fish + neovim programs, fish abbreviations (`nv`, `yt-*`, `cnx*`), package set, fonts, vnstat |
+| `.config/nixos/configuration.nix` | NixOS config: GNOME, fish/neovim, abbreviations (`nv`, `yt-*`, `cnx*`), packages, fonts, vnstat |
 | `.config/fd/ignore` | Ignore rules for `fd` |
 | `.local/bin/keepalive` | `keepalive COMMAND [ARGS…]` — runs the command under `systemd-inhibit --what=idle:sleep` so downloads/players don't get suspended |
 | `.gitconfig` | Git aliases (`s`, `co`, `lo`, `logPretty`, …), `delta` pager, `zdiff3` merge style |
@@ -51,12 +51,11 @@ cp ~/dotfiles/.gitconfig ~/
 
 ## Machine notes
 
-- The `.config` / `.local` / `.gitconfig` parts are portable to any Linux
-  home directory; only `.config/nixos/configuration.nix` is NixOS-specific
-  (apply with `sudo nixos-rebuild switch` on NixOS).
-- `configuration.nix` is machine-specific: hostname `nixos`, user `taraka`,
-  timezone `Asia/Kolkata`, and it imports `/etc/nixos/hardware-configuration.nix`
-  — adjust these before rebuilding another machine.
+- Everything except `.config/nixos/configuration.nix` is portable Linux;
+  that file is NixOS-only (`sudo nixos-rebuild switch`).
+- Machine-specific: hostname `nixos`, user `taraka`, timezone
+  `Asia/Kolkata`, imports `/etc/nixos/hardware-configuration.nix` —
+  adjust before reuse.
 - `.claude/settings.json` hardcodes the statusline path as
   `/home/taraka/.claude/statusline-command.sh`; update it if your username differs.
 
